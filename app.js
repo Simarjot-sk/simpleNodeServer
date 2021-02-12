@@ -7,6 +7,11 @@ let getPath = (url) =>
 
 let requestMap = []
 
+/**
+ * maps a path with a html file name
+ * @param {string} path 
+ * @param {string} fileName 
+ */
 function mapRequest(path, fileName){
     requestMap.push({
         'path': path,
@@ -14,6 +19,12 @@ function mapRequest(path, fileName){
     })
 }
 
+/**
+ * tries to match the path of current request, with the paths available in requestMap,
+ * if path is not found in the requestMap, a simple message is printed.
+ * @param {http.IncomingMessage} req the http request
+ * @param {http.ServerResponse} res the http response
+ */
 function performRequest(req, res){
     let path = getPath(req.url)
     let index = requestMap.findIndex((item) => item.path === path)
@@ -29,7 +40,7 @@ function performRequest(req, res){
             return res.end();
         })
     }else{
-        res.end('404 not found bitch');
+        res.end('404 not found bro');
     }
 }
 
